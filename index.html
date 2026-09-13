@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIHS SCHOOLSAFE</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --blue:#1769aa;--green:#16865b;--purple:#7046a8;--white:#fff;
+  --ink:#17324d;--muted:#64748b;--bg:#f4f8fc;--line:#dce6ef;
+}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.screen{display:none;min-height:100vh}
+.screen.active{display:flex}
+.welcome{
+  min-height:100vh;padding:28px 18px;align-items:center;justify-content:center;
+  background:linear-gradient(145deg,#1769aa 0%,#7046a8 100%);
+}
+.welcome-card{
+  width:min(620px,100%);text-align:center;background:rgba(255,255,255,.97);
+  border-radius:28px;padding:34px 24px;box-shadow:0 20px 60px rgba(0,0,0,.22)
+}
+.logo{width:130px;height:130px;object-fit:contain;border-radius:50%;background:#fff;margin-bottom:14px}
+h1{margin:6px 0 8px;font-size:31px}
+.subtitle{color:#53657a;line-height:1.5;margin:0 auto 25px;max-width:480px}
+.btn{
+  border:0;border-radius:14px;padding:14px 20px;font-weight:700;
+  transition:.15s;min-height:48px
+}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-green{background:var(--green);color:#fff}
+.btn-purple{background:var(--purple);color:#fff}
+.btn-light{background:#edf3f8;color:var(--ink)}
+.btn-danger{background:#b42318;color:#fff}
+.full{width:100%}
+.app{min-height:100vh;flex-direction:column}
+.topbar{
+  background:#fff;border-bottom:1px solid var(--line);padding:12px 16px;
+  display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:5
+}
+.top-logo{width:48px;height:48px;border-radius:50%;object-fit:contain}
+.brand{font-weight:800;line-height:1.1}.brand small{display:block;color:var(--muted);font-weight:500;margin-top:3px}
+.container{width:min(850px,100%);margin:0 auto;padding:22px 16px 40px}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;
+  box-shadow:0 5px 18px rgba(23,50,77,.06);margin-bottom:16px
+}
+.card h2,.card h3{margin-top:0}
+.progress{height:8px;background:#e8eef4;border-radius:20px;overflow:hidden;margin-bottom:18px}
+.progress-bar{height:100%;background:linear-gradient(90deg,var(--blue),var(--purple));width:25%}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.option{
+  border:2px solid var(--line);background:#fff;border-radius:16px;padding:16px;
+  text-align:left;min-height:64px;color:var(--ink);font-weight:700
+}
+.option.selected{border-color:var(--blue);background:#eef7ff}
+label{display:block;font-weight:700;margin:14px 0 7px}
+input,select,textarea{
+  width:100%;border:1px solid #cbd8e4;border-radius:12px;padding:13px;
+  background:#fff;color:var(--ink);outline:none
+}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(23,105,170,.1)}
+textarea{min-height:130px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.row>*{flex:1}
+.note{font-size:14px;color:var(--muted);line-height:1.5}
+.badge{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef3f8;font-size:13px;font-weight:700}
+.home-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.home-btn{padding:22px 16px;text-align:left;border:1px solid var(--line);border-radius:18px;background:#fff}
+.home-btn strong{display:block;font-size:17px;margin-bottom:6px}
+.home-btn span{color:var(--muted);font-size:14px;line-height:1.4}
+.alert{padding:13px 15px;border-radius:12px;background:#fff7e6;border:1px solid #f4d58b;color:#7a5100;margin-bottom:15px}
+.success{text-align:center}
+.code{
+  font-size:25px;font-weight:900;letter-spacing:1px;padding:16px;
+  background:#f1f8f5;border:2px dashed var(--green);border-radius:14px;margin:15px 0
+}
+.hidden{display:none!important}
+.footer{text-align:center;color:var(--muted);font-size:13px;padding:8px 0 25px}
+.back{margin-right:auto}
+@media(max-width:600px){
+  .grid,.home-grid{grid-template-columns:1fr}
+  h1{font-size:27px}.welcome-card{padding:28px 18px}
+  .row{flex-direction:column}.row>*{width:100%}
+}
+</style>
+</head>
+<body>
+
+<section id="welcome" class="screen active welcome">
+  <div class="welcome-card">
+    <img src="NIHS_school_logo.jpg" class="logo" alt="NIHS School Logo">
+    <h1>NIHS SCHOOLSAFE</h1>
+    <p class="subtitle">New Israel High School Student Safety &amp; Reporting System</p>
+    <button class="btn btn-primary full" id="startBtn">NEXT</button>
+  </div>
+</section>
+
+<section id="student" class="screen app">
+  <header class="topbar">
+    <img src="NIHS_school_logo.jpg" class="top-logo" alt="NIHS">
+    <div class="brand">NIHS SCHOOLSAFE<small>Student Safety &amp; Reporting</small></div>
+  </header>
+  <main class="container">
+    <div class="card">
+      <h2>Who are you?</h2>
+      <p class="note">Choose how you want to continue.</p>
+      <div class="grid">
+        <button class="option" data-student="Student">👤 Student</button>
+        <button class="option" data-student="Other">👥 Other</button>
+      </div>
+    </div>
+  </main>
+</section>
+
+<section id="grade" class="screen app">
+  <header class="topbar">
+    <button class="btn btn-light back" id="gradeBack">← Back</button>
+    <div class="brand">Student Information</div>
+  </header>
+  <main class="container">
+    <div class="card">
+      <h2>Grade &amp; Section</h2>
+      <label for="gradeInput">Grade</label>
+      <select id="gradeInput">
+        <option value="">Select grade</option>
+        <option>Grade 7</option><option>Grade 8</option><option>Grade 9</option>
+        <option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
+      </select>
+      <label for="sectionInput">Section (optional)</label>
+      <input id="sectionInput" placeholder="Enter your section">
+      <div class="row">
+        <button class="btn btn-primary" id="gradeNext">Continue</button>
+      </div>
+    </div>
+  </main>
+</section>
+
+<section id="home" class="screen app">
+  <header class="topbar">
+    <img src="NIHS_school_logo.jpg" class="top-logo" alt="NIHS">
+    <div class="brand">NIHS SCHOOLSAFE<small>Home</small></div>
+  </header>
+  <main class="container">
+    <div class="card">
+      <h2>How can we help?</h2>
+      <p class="note">Use this system to report a safety concern or check a previous report.</p>
+    </div>
+    <div class="home-grid">
+      <button class="home-btn" id="reportBtn"><strong>📝 Report a Concern</strong><span>Submit a student safety or school concern.</span></button>
+      <button class="home-btn" id="trackBtn"><strong>🔎 Track a Report</strong><span>Check a report code saved on this device.</span></button>
+      <button class="home-btn" id="helpBtn"><strong>❓ Help</strong><span>Learn how the reporting process works.</span></button>
+      <button class="home-btn" id="privacyBtn"><strong>🔒 Privacy &amp; Rights</strong><span>Read basic privacy and student-rights information.</span></button>
+    </div>
+  </main>
+</section>
+
+<section id="report" class="screen app">
+  <header class="topbar">
+    <button class="btn btn-light back" id="reportBack">← Home</button>
+    <div class="brand">New Report</div>
+  </header>
+  <main class="container">
+    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+    <div id="step1" class="card">
+      <h2>Step 1 — What happened?</h2>
+      <p class="note">Select the concern that best describes the situation.</p>
+      <div class="grid" id="categoryGrid">
+        <button class="option" data-category="Bullying">Bullying</button>
+        <button class="option" data-category="Cyberbullying">Cyberbullying</button>
+        <button class="option" data-category="Privacy Violation">Privacy Violation</button>
+        <button class="option" data-category="Harassment">Harassment</button>
+        <button class="option" data-category="Threat / Intimidation">Threat / Intimidation</button>
+        <button class="option" data-category="Discrimination">Discrimination</button>
+        <button class="option" data-category="Unsafe Environment">Unsafe Environment</button>
+        <button class="option" data-category="Other Concern">Other Concern</button>
+      </div>
+      <div class="row"><button class="btn btn-primary" id="step1Next">Continue</button></div>
+    </div>
+
+    <div id="step2" class="card hidden">
+      <h2>Step 2 — Incident details</h2>
+      <label for="description">What happened?</label>
+      <textarea id="description" maxlength="5000" placeholder="Describe what happened. Please avoid unnecessary sensitive information."></textarea>
+      <label for="location">Where did it happen?</label>
+      <input id="location" maxlength="500" placeholder="Example: Classroom, hallway, online">
+      <div class="grid">
+        <div><label for="incidentDate">Date</label><input type="date" id="incidentDate"></div>
+        <div><label for="incidentTime">Time (optional)</label><input type="time" id="incidentTime"></div>
+      </div>
+      <label for="repeated">Has this happened more than once?</label>
+      <select id="repeated"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select>
+      <div class="row">
+        <button class="btn btn-light" id="step2Back">Back</button>
+        <button class="btn btn-primary" id="step2Next">Continue</button>
+      </div>
+    </div>
+
+    <div id="step3" class="card hidden">
+      <h2>Step 3 — Safety &amp; people involved</h2>
+      <label for="urgency">How urgent is the concern?</label>
+      <select id="urgency"><option value="">Select</option><option>Normal</option><option>Needs Attention</option><option>Urgent</option></select>
+      <label for="involved">Person/s involved (optional)</label>
+      <input id="involved" maxlength="1000" placeholder="Names or descriptions, if you are comfortable">
+      <label for="witnesses">Witnesses (optional)</label>
+      <input id="witnesses" maxlength="1000" placeholder="Names or descriptions">
+      <label for="danger">Is there immediate danger right now?</label>
+      <select id="danger"><option value="">Select</option><option>Yes</option><option>No</option><option>Not sure</option></select>
+      <div class="row">
+        <button class="btn btn-light" id="step3Back">Back</button>
+        <button class="btn btn-primary" id="step3Next">Continue</button>
+      </div>
+    </div>
+
+    <div id="step4" class="card hidden">
+      <h2>Step 4 — Submission</h2>
+      <div class="alert">You can submit anonymously. Your report will receive a unique report code.</div>
+      <label for="mode">Submission mode</label>
+      <select id="mode"><option>Anonymous</option><option>Identified</option></select>
+      <div id="identityFields" class="hidden">
+        <label for="studentName">Name</label>
+        <input id="studentName" maxlength="150" placeholder="Your name">
+      </div>
+      <label for="confirm">Confirmation</label>
+      <select id="confirm"><option value="">Select</option><option value="yes">I confirm that the information is accurate to the best of my knowledge.</option></select>
+      <div class="row">
+        <button class="btn btn-light" id="step4Back">Back</button>
+        <button class="btn btn-green" id="reviewBtn">Review Report</button>
+      </div>
+    </div>
+
+    <div id="review" class="card hidden">
+      <h2>Review your report</h2>
+      <div id="reviewContent"></div>
+      <div class="row">
+        <button class="btn btn-light" id="reviewBack">Back</button>
+        <button class="btn btn-green" id="submitBtn">Submit Report</button>
+      </div>
+      <p id="submitStatus" class="note"></p>
+    </div>
+
+    <div id="success" class="card success hidden">
+      <h2>Report Submitted ✅</h2>
+      <p>Your report was received successfully.</p>
+      <div class="code" id="reportCode"></div>
+      <p class="note">Save this code if you need to refer to your report later.</p>
+      <div class="row">
+        <button class="btn btn-primary" id="newReportBtn">New Report</button>
+        <button class="btn btn-light" id="successHomeBtn">Home</button>
+      </div>
+    </div>
+  </main>
+  <div class="footer">NIHS SCHOOLSAFE • New Israel High School</div>
+</section>
+
+<section id="info" class="screen app">
+  <header class="topbar">
+    <button class="btn btn-light back" id="infoBack">← Back</button>
+    <div class="brand" id="infoTitle">Information</div>
+  </header>
+  <main class="container">
+    <div class="card" id="infoContent"></div>
+  </main>
+</section>
+
+<script>
+const SUPABASE_URL="https://rpsdkkmgskhhymwoikzr.supabase.co";
+const SUPABASE_KEY="sb_publishable_7hHb9DBcdJ2vyn1rYSD1og_Y9hSY34M";
+
+const state={studentType:"",grade:"",section:"",category:""};
+
+const $=id=>document.getElementById(id);
+const show=id=>{
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  $(id).classList.add("active");
+  window.scrollTo(0,0);
+};
+
+function resetReport(){
+  state.category="";
+  ["description","location","incidentTime","involved","witnesses","studentName"].forEach(id=>$(id).value="");
+  $("incidentDate").value=new Date().toISOString().slice(0,10);
+  $("repeated").value="";$("urgency").value="";$("danger").value="";
+  $("mode").value="Anonymous";$("confirm").value="";
+  $("identityFields").classList.add("hidden");
+  document.querySelectorAll("#categoryGrid .option").forEach(b=>b.classList.remove("selected"));
+  ["step2","step3","step4","review","success"].forEach(id=>$(id).classList.add("hidden"));
+  $("step1").classList.remove("hidden");$("progressBar").style.width="25%";
+}
+
+function reportStep(id,width){
+  ["step1","step2","step3","step4","review","success"].forEach(x=>$(x).classList.add("hidden"));
+  $(id).classList.remove("hidden");$("progressBar").style.width=width;
+}
+
+$("startBtn").onclick=()=>show("student");
+
+document.querySelectorAll("[data-student]").forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll("[data-student]").forEach(x=>x.classList.remove("selected"));
+    btn.classList.add("selected");state.studentType=btn.dataset.student;
+    if(state.studentType==="Student")show("grade");else show("home");
+  };
+});
+
+$("gradeBack").onclick=()=>show("student");
+$("gradeNext").onclick=()=>{
+  if(!$("gradeInput").value){alert("Please select your grade.");return}
+  state.grade=$("gradeInput").value;state.section=$("sectionInput").value.trim();show("home");
+};
+
+$("reportBtn").onclick=()=>{resetReport();show("report")};
+$("reportBack").onclick=()=>show("home");
+$("trackBtn").onclick=()=>{
+  const saved=JSON.parse(localStorage.getItem("nihs_reports")||"[]");
+  $("infoTitle").textContent="Track a Report";
+  $("infoContent").innerHTML=saved.length
+    ? "<h2>Reports on this device</h2>"+saved.map(r=>`<div class="card"><b>${escapeHtml(r.code)}</b><br><span class="badge">${escapeHtml(r.status)}</span><br><small>${new Date(r.createdAt).toLocaleString()}</small></div>`).join("")
+    : "<h2>No saved reports</h2><p class='note'>Reports submitted from this browser will appear here.</p>";
+  show("info");
+};
+
+$("helpBtn").onclick=()=>{
+  $("infoTitle").textContent="Help";
+  $("infoContent").innerHTML="<h2>How reporting works</h2><p>1. Choose the type of concern.</p><p>2. Describe what happened and where.</p><p>3. Add safety details.</p><p>4. Review and submit.</p><p class='note'>If there is immediate danger, seek help from a trusted adult or school authority right away.</p>";
+  show("info");
+};
+
+$("privacyBtn").onclick=()=>{
+  $("infoTitle").textContent="Privacy & Rights";
+  $("infoContent").innerHTML="<h2>Privacy</h2><p>Use the anonymous option when you do not want to provide your name. Only information needed for the report should be submitted.</p><h2>Student rights</h2><p>Students should be treated with dignity and respect when raising safety concerns. Reports should be handled responsibly by authorized school personnel.</p>";
+  show("info");
+};
+$("infoBack").onclick=()=>show("home");
+
+document.querySelectorAll("#categoryGrid .option").forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll("#categoryGrid .option").forEach(x=>x.classList.remove("selected"));
+    btn.classList.add("selected");state.category=btn.dataset.category;
+  };
+});
+$("step1Next").onclick=()=>{
+  if(!state.category){alert("Please select what happened.");return}
+  reportStep("step2","50%");
+};
+$("step2Back").onclick=()=>reportStep("step1","25%");
+$("step2Next").onclick=()=>{
+  if($("description").value.trim().length<10){alert("Please describe what happened (at least 10 characters).");return}
+  if(!$("location").value.trim()){alert("Please enter where it happened.");return}
+  if(!$("incidentDate").value){alert("Please select the date.");return}
+  if(!$("repeated").value){alert("Please select whether it happened more than once.");return}
+  reportStep("step3","70%");
+};
+$("step3Back").onclick=()=>reportStep("step2","50%");
+$("step3Next").onclick=()=>{
+  if(!$("urgency").value||!$("danger").value){alert("Please complete the safety questions.");return}
+  reportStep("step4","88%");
+};
+$("step4Back").onclick=()=>reportStep("step3","70%");
+$("mode").onchange=()=>$("identityFields").classList.toggle("hidden",$("mode").value!=="Identified");
+$("reviewBack").onclick=()=>reportStep("step4","88%");
+
+$("reviewBtn").onclick=()=>{
+  if(!$("confirm").value){alert("Please confirm the information before reviewing.");return}
+  const mode=$("mode").value;
+  if(mode==="Identified"&&!$("studentName").value.trim()){alert("Please enter your name or choose Anonymous.");return}
+  const data=getReportData();
+  $("reviewContent").innerHTML=`
+    <p><b>Category:</b> ${escapeHtml(data.category)}</p>
+    <p><b>Description:</b> ${escapeHtml(data.description)}</p>
+    <p><b>Location:</b> ${escapeHtml(data.location)}</p>
+    <p><b>Date:</b> ${escapeHtml(data.incident_date)}</p>
+    <p><b>Repeated:</b> ${escapeHtml(data.repeated)}</p>
+    <p><b>Urgency:</b> ${escapeHtml(data.urgency)}</p>
+    <p><b>Immediate danger:</b> ${escapeHtml(data.immediate_danger)}</p>
+    <p><b>Submission:</b> ${escapeHtml(data.submission_mode)}</p>`;
+  reportStep("review","100%");
+};
+
+function getReportData(){
+  const anonymous=$("mode").value==="Anonymous";
+  return {
+    report_code:"",
+    category:state.category,
+    description:$("description").value.trim(),
+    location:$("location").value.trim(),
+    incident_date:$("incidentDate").value,
+    incident_time:$("incidentTime").value||null,
+    repeated:$("repeated").value,
+    urgency:$("urgency").value,
+    involved:$("involved").value.trim()||null,
+    witnesses:$("witnesses").value.trim()||null,
+    immediate_danger:$("danger").value,
+    anonymous,
+    student_name:anonymous?null:$("studentName").value.trim(),
+    grade_section:state.grade?(state.grade+(state.section?" - "+state.section:"")):null,
+    submission_mode:$("mode").value,
+    status:"Received"
+  };
+}
+
+function makeCode(){
+  return "NIHS-"+Math.random().toString(36).substring(2,8).toUpperCase();
+}
+
+$("submitBtn").onclick=async()=>{
+  const btn=$("submitBtn"),status=$("submitStatus");
+  btn.disabled=true;status.textContent="Submitting report…";
+  const report=getReportData();report.report_code=makeCode();
+  try{
+    const res=await fetch(SUPABASE_URL+"/rest/v1/reports",{
+      method:"POST",
+      headers:{
+        apikey:SUPABASE_KEY,
+        Authorization:"Bearer "+SUPABASE_KEY,
+        "Content-Type":"application/json",
+        Prefer:"return=minimal"
+      },
+      body:JSON.stringify(report)
+    });
+    if(!res.ok)throw new Error(await res.text());
+    const saved=JSON.parse(localStorage.getItem("nihs_reports")||"[]");
+    saved.push({code:report.report_code,status:"Received",createdAt:new Date().toISOString()});
+    localStorage.setItem("nihs_reports",JSON.stringify(saved));
+    $("reportCode").textContent=report.report_code;
+    reportStep("success","100%");
+  }catch(err){
+    console.error(err);
+    status.textContent="The report could not be submitted. Please check your internet connection and try again.";
+    alert("Submission failed. Please try again.");
+  }finally{btn.disabled=false}
+};
+
+$("newReportBtn").onclick=()=>{resetReport()};
+$("successHomeBtn").onclick=()=>show("home");
+
+function escapeHtml(v){
+  return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+
+$("incidentDate").value=new Date().toISOString().slice(0,10);
+</script>
+</body>
+</html>
