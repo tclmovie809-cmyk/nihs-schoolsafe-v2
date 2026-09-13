@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,33 +7,64 @@
 
 <style>
 *{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font-family:Georgia,"Times New Roman",serif}
-body{background:#f5f9ff;color:#18213a}
-.screen{min-height:100vh;display:none;align-items:center;justify-content:center;padding:24px 16px}
-.screen.active{display:flex}
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:Georgia,"Times New Roman",serif;
+}
+
+body{
+  background:#f5f9ff;
+  color:#18213a;
+}
+
+.screen{
+  min-height:100vh;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px 16px;
+}
+
+.screen.active{
+  display:flex;
+}
+
+/* WELCOME */
 
 .welcome{
-  color:#fff;text-align:center;
-  background:linear-gradient(155deg,#075b9e 0%,#2349ad 48%,#5520a5 100%)
+  color:#fff;
+  text-align:center;
+  background:linear-gradient(155deg,#075b9e 0%,#2349ad 48%,#5520a5 100%);
 }
-.welcome-card{width:min(650px,100%)}
+
+.welcome-card{
+  width:min(650px,100%);
+}
 
 .logo{
-  width:190px;height:190px;object-fit:contain;border-radius:50%;
-  background:#fff;padding:10px;display:block;margin:0 auto 34px;
-  box-shadow:0 10px 28px rgba(0,0,0,.20)
+  width:190px;
+  height:190px;
+  object-fit:contain;
+  border-radius:50%;
+  background:#fff;
+  padding:10px;
+  display:block;
+  margin:0 auto 34px;
+  box-shadow:0 10px 28px rgba(0,0,0,.20);
 }
 
 h1{
   font-size:clamp(34px,8vw,58px);
   letter-spacing:3px;
-  margin:0 0 20px
+  margin:0 0 20px;
 }
 
 .subtitle{
   font-size:clamp(20px,5vw,30px);
   line-height:1.35;
-  margin:0 0 42px
+  margin:0 0 42px;
 }
 
 button{
@@ -43,20 +74,28 @@ button{
   font-weight:bold;
   border-radius:18px;
   padding:16px 24px;
-  transition:.15s transform,.15s opacity,.15s box-shadow
+  transition:.15s;
 }
 
-button:active{transform:scale(.97)}
+button:active{
+  transform:scale(.97);
+}
+
+button:disabled{
+  cursor:not-allowed;
+}
 
 .primary{
   background:#fff;
   color:#5520a5;
-  box-shadow:0 7px 18px rgba(0,0,0,.12)
+  box-shadow:0 7px 18px rgba(0,0,0,.12);
 }
+
+/* APP */
 
 .app{
   background:linear-gradient(160deg,#f6fbff 0%,#eef9f4 100%);
-  align-items:flex-start
+  align-items:flex-start;
 }
 
 .panel{
@@ -65,12 +104,12 @@ button:active{transform:scale(.97)}
   border-radius:28px;
   padding:26px;
   box-shadow:0 15px 42px rgba(20,55,90,.12);
-  border:1px solid #edf2f7
+  border:1px solid #edf2f7;
 }
 
 .top{
   text-align:center;
-  margin-bottom:20px
+  margin-bottom:20px;
 }
 
 .small-logo{
@@ -80,17 +119,19 @@ button:active{transform:scale(.97)}
   object-fit:contain;
   background:#fff;
   padding:4px;
-  box-shadow:0 5px 15px rgba(20,55,90,.12)
+  box-shadow:0 5px 15px rgba(20,55,90,.12);
 }
 
 .title{
   color:#15549a;
   font-size:clamp(27px,7vw,38px);
   margin:10px 0 6px;
-  font-weight:bold
+  font-weight:bold;
 }
 
-.muted{color:#657182}
+.muted{
+  color:#657182;
+}
 
 .home-intro{
   background:linear-gradient(135deg,#eef7ff,#f7f0ff);
@@ -98,20 +139,20 @@ button:active{transform:scale(.97)}
   padding:16px;
   margin:16px 0 20px;
   border:1px solid #e0eaf5;
-  text-align:center
+  text-align:center;
 }
 
 .home-intro strong{
   display:block;
   color:#15549a;
   font-size:18px;
-  margin-bottom:3px
+  margin-bottom:3px;
 }
 
 .home-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:13px
+  gap:13px;
 }
 
 .home-btn{
@@ -121,52 +162,53 @@ button:active{transform:scale(.97)}
   border-radius:18px;
   background:#f8fbff;
   color:#174e8d;
-  border:2px solid #dce9f6
+  border:2px solid #dce9f6;
 }
 
 .home-btn.report{
   background:linear-gradient(135deg,#15549a,#5520a5);
   color:#fff;
-  border:0
+  border:0;
 }
 
 .home-btn.track{
   background:#eff8f2;
   color:#177447;
-  border-color:#cdebd9
+  border-color:#cdebd9;
 }
 
 .home-btn.help{
   background:#fff7f7;
   color:#a13b45;
-  border-color:#f0d2d5
+  border-color:#f0d2d5;
 }
 
 .home-btn.privacy{
   background:#f5f1ff;
   color:#653aa3;
-  border-color:#ddd0f5
+  border-color:#ddd0f5;
 }
 
 .home-btn.rights{
   background:#f2f9ff;
   color:#15549a;
-  border-color:#d3e8f8
+  border-color:#d3e8f8;
 }
 
 .home-btn.about{
   background:#f7fafb;
   color:#435a68;
-  border-color:#dce6eb
+  border-color:#dce6eb;
 }
 
 .choices{
   display:grid;
   gap:13px;
-  margin-top:20px
+  margin-top:20px;
 }
 
-.choice,.option{
+.choice,
+.option{
   width:100%;
   min-width:0;
   background:#f7fbff;
@@ -174,45 +216,52 @@ button:active{transform:scale(.97)}
   border:2px solid #d8e7f7;
   border-radius:16px;
   text-align:center;
-  padding:17px
+  padding:17px;
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:12px
+  gap:12px;
 }
 
 .back{
   margin-top:18px;
   background:#edf1f5;
   color:#445;
-  border-radius:14px
+  border-radius:14px;
 }
 
-.step{display:none}
-.step.active{display:block}
+.step{
+  display:none;
+}
+
+.step.active{
+  display:block;
+}
 
 label{
   display:block;
   font-weight:bold;
   margin:17px 0 7px;
-  color:#25334b
+  color:#25334b;
 }
 
-input,textarea,select{
+input,
+textarea,
+select{
   width:100%;
   padding:13px 14px;
   border:1px solid #cbd6e2;
   border-radius:12px;
   font:inherit;
   background:#fff;
-  outline:none
+  outline:none;
 }
 
 textarea{
   min-height:130px;
-  resize:vertical
+  resize:vertical;
 }
 
 .actions{
@@ -220,14 +269,16 @@ textarea{
   gap:10px;
   justify-content:flex-end;
   flex-wrap:wrap;
-  margin-top:23px
+  margin-top:23px;
 }
 
-.actions button{min-width:135px}
+.actions button{
+  min-width:135px;
+}
 
 .success{
   text-align:center;
-  padding:18px 0
+  padding:18px 0;
 }
 
 .code{
@@ -239,37 +290,49 @@ textarea{
   padding:14px 22px;
   font-size:25px;
   font-weight:bold;
-  margin:15px 0
+  margin:15px 0;
 }
 
 .saving{
   color:#15549a;
   font-weight:bold;
-  margin-top:12px
+  margin-top:12px;
 }
 
 .error{
   color:#a13b45;
   font-weight:bold;
-  margin-top:12px
+  margin-top:12px;
 }
 
 @media(max-width:520px){
-  .screen{padding:18px 12px}
+  .screen{
+    padding:18px 12px;
+  }
+
   .logo{
     width:165px;
     height:165px;
-    margin-bottom:28px
+    margin-bottom:28px;
   }
+
   .panel{
     padding:20px;
-    border-radius:24px
+    border-radius:24px;
   }
-  .grid,.home-grid{
-    grid-template-columns:1fr
+
+  .grid,
+  .home-grid{
+    grid-template-columns:1fr;
   }
-  h1{letter-spacing:2px}
-  .subtitle{margin-bottom:34px}
+
+  h1{
+    letter-spacing:2px;
+  }
+
+  .subtitle{
+    margin-bottom:34px;
+  }
 }
 </style>
 </head>
@@ -277,6 +340,7 @@ textarea{
 <body>
 
 <!-- WELCOME -->
+
 <section id="welcome" class="screen welcome active">
   <div class="welcome-card">
 
@@ -302,10 +366,12 @@ textarea{
 
 
 <!-- STUDENT TYPE -->
+
 <section id="studentType" class="screen app">
   <div class="panel">
 
     <div class="top">
+
       <img
         src="NIHS_school_logo.jpg"
         class="small-logo"
@@ -319,6 +385,7 @@ textarea{
       <p class="muted">
         Choose your student type.
       </p>
+
     </div>
 
     <div class="choices">
@@ -342,6 +409,7 @@ textarea{
 
 
 <!-- GRADE -->
+
 <section id="gradeScreen" class="screen app">
   <div class="panel">
 
@@ -366,6 +434,7 @@ textarea{
 
 
 <!-- HOME -->
+
 <section id="homeScreen" class="screen app">
   <div class="panel">
 
@@ -425,10 +494,12 @@ textarea{
 
 
 <!-- REPORT -->
+
 <section id="reportScreen" class="screen app">
   <div class="panel">
 
     <!-- STEP 1 -->
+
     <div id="step1" class="step active">
 
       <div class="title">
@@ -472,17 +543,16 @@ textarea{
       </div>
 
       <div class="actions">
-
         <button id="step1Next" class="primary">
           NEXT
         </button>
-
       </div>
 
     </div>
 
 
     <!-- STEP 2 -->
+
     <div id="step2" class="step">
 
       <div class="title">
@@ -530,19 +600,9 @@ textarea{
       </label>
 
       <select id="repeated">
-
-        <option value="Yes">
-          Yes
-        </option>
-
-        <option value="No">
-          No
-        </option>
-
-        <option value="Not sure">
-          Not sure
-        </option>
-
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="Not sure">Not sure</option>
       </select>
 
       <label for="involved">
@@ -568,19 +628,9 @@ textarea{
       </label>
 
       <select id="immediateDanger">
-
-        <option value="No">
-          No
-        </option>
-
-        <option value="Yes">
-          Yes
-        </option>
-
-        <option value="Not sure">
-          Not sure
-        </option>
-
+        <option value="No">No</option>
+        <option value="Yes">Yes</option>
+        <option value="Not sure">Not sure</option>
       </select>
 
       <div class="actions">
@@ -599,6 +649,7 @@ textarea{
 
 
     <!-- STEP 3 -->
+
     <div id="step3" class="step">
 
       <div class="title">
@@ -607,24 +658,15 @@ textarea{
 
       <div class="choices">
 
-        <button
-          class="option urgency"
-          data-urgency="Normal"
-        >
+        <button class="option urgency" data-urgency="Normal">
           Normal
         </button>
 
-        <button
-          class="option urgency"
-          data-urgency="Needs Attention"
-        >
+        <button class="option urgency" data-urgency="Needs Attention">
           Needs Attention
         </button>
 
-        <button
-          class="option urgency"
-          data-urgency="Urgent"
-        >
+        <button class="option urgency" data-urgency="Urgent">
           Urgent
         </button>
 
@@ -646,6 +688,7 @@ textarea{
 
 
     <!-- STEP 4 -->
+
     <div id="step4" class="step">
 
       <div class="title">
@@ -684,6 +727,7 @@ textarea{
 
 
     <!-- SUCCESS -->
+
     <div id="successStep" class="step">
 
       <div class="success">
@@ -718,6 +762,7 @@ textarea{
 
 
 <!-- TRACK -->
+
 <section id="trackScreen" class="screen app">
   <div class="panel">
 
@@ -757,6 +802,7 @@ textarea{
 
 
 <!-- INFORMATION -->
+
 <section id="infoScreen" class="screen app">
   <div class="panel">
 
@@ -784,9 +830,9 @@ textarea{
 "use strict";
 
 
-/* =========================================================
-   SUPABASE CONNECTION
-   ========================================================= */
+/* ================================
+   SUPABASE
+================================ */
 
 const SUPABASE_URL =
   "https://rpsdkkmgskhhymwoikzr.supabase.co";
@@ -795,87 +841,68 @@ const SUPABASE_KEY =
   "sb_publishable_7hHb9DBcdJ2vyn1rYSD1og_Y9hSY34M";
 
 
-/* =========================================================
-   APP STATE
-   ========================================================= */
+/* ================================
+   STATE
+================================ */
+
+const state = {
+  studentType:"",
+  grade:"",
+  reportType:"",
+  urgency:""
+};
+
 
 const screens =
   document.querySelectorAll(".screen");
 
 
-const state = {
-
-  studentType: "",
-
-  grade: "",
-
-  reportType: "",
-
-  urgency: ""
-
-};
-
-
-/* =========================================================
+/* ================================
    SCREEN CONTROL
-   ========================================================= */
+================================ */
 
 function showScreen(id){
 
   screens.forEach(function(screen){
-
     screen.classList.remove("active");
-
   });
-
 
   const target =
     document.getElementById(id);
 
-
   if(target){
-
     target.classList.add("active");
-
   }
 
-
   window.scrollTo(0,0);
-
 }
 
 
-/* =========================================================
-   REPORT STEP CONTROL
-   ========================================================= */
+/* ================================
+   STEP CONTROL
+================================ */
 
 function showStep(id){
 
   document
     .querySelectorAll("#reportScreen .step")
     .forEach(function(step){
-
       step.classList.remove("active");
-
     });
-
 
   const target =
     document.getElementById(id);
 
-
   if(target){
-
     target.classList.add("active");
-
   }
 
 }
 
 
-/* =========================================================
-   WELCOME
-   ========================================================= */
+/* ================================
+   WELCOME NEXT
+================================ */
 
 document
   .getElementById("nextWelcome")
@@ -886,9 +913,9 @@ document
   });
 
 
-/* =========================================================
+/* ================================
    STUDENT TYPE
-   ========================================================= */
+================================ */
 
 document
   .querySelectorAll(".choice[data-type]")
@@ -899,76 +926,66 @@ document
       state.studentType =
         this.dataset.type;
 
+      let grades;
 
-      const grades =
-        state.studentType === "Junior High School"
+      if(state.studentType === "Junior High School"){
 
-        ? [
-            "Grade 7",
-            "Grade 8",
-            "Grade 9",
-            "Grade 10"
-          ]
+        grades = [
+          "Grade 7",
+          "Grade 8",
+          "Grade 9",
+          "Grade 10"
+        ];
 
-        : [
-            "Grade 11",
-            "Grade 12"
-          ];
+      }else{
 
+        grades = [
+          "Grade 11",
+          "Grade 12"
+        ];
+
+      }
 
       document
         .getElementById("gradeSubtitle")
         .textContent =
         state.studentType;
 
-
       const box =
         document.getElementById("gradeButtons");
 
-
       box.innerHTML = "";
-
 
       grades.forEach(function(grade){
 
         const button =
           document.createElement("button");
 
-
         button.className =
           "option";
-
 
         button.textContent =
           grade;
 
+        button.addEventListener("click",function(){
 
-        button.addEventListener(
-          "click",
-          function(){
+          state.grade =
+            grade;
 
-            state.grade =
-              grade;
+          document
+            .getElementById("studentInfo")
+            .textContent =
+            state.studentType +
+            " • " +
+            state.grade;
 
+          showScreen("homeScreen");
 
-            document
-              .getElementById("studentInfo")
-              .textContent =
-              state.studentType +
-              " • " +
-              state.grade;
-
-
-            showScreen("homeScreen");
-
-          }
-        );
-
+        });
 
         box.appendChild(button);
 
       });
-
 
       showScreen("gradeScreen");
 
@@ -977,9 +994,9 @@ document
   });
 
 
-/* =========================================================
-   BACK
-   ========================================================= */
+/* ================================
+   BACK BUTTONS
+================================ */
 
 document
   .getElementById("backStudent")
@@ -999,40 +1016,32 @@ document
   });
 
 
-/* =========================================================
+/* ================================
    MAKE REPORT
-   ========================================================= */
+================================ */
 
 document
   .getElementById("makeReport")
   .addEventListener("click",function(){
 
     state.reportType = "";
-
     state.urgency = "";
 
-
     document
-      .querySelectorAll(
-        ".option[data-report-type],.urgency"
-      )
+      .querySelectorAll(".option[data-report-type],.urgency")
       .forEach(function(item){
 
-        item.style.outline =
-          "none";
+        item.style.outline = "none";
 
       });
-
 
     document
       .getElementById("submitMessage")
       .textContent = "";
 
-
     document
       .getElementById("submitError")
       .textContent = "";
-
 
     showStep("step1");
 
@@ -1041,103 +1050,9 @@ document
   });
 
 
-/* =========================================================
-   TRACK
-   ========================================================= */
-
-document
-  .getElementById("trackButton")
-  .addEventListener("click",function(){
-
-    document
-      .getElementById("trackInput")
-      .value = "";
-
-
-    document
-      .getElementById("trackResult")
-      .textContent = "";
-
-
-    showScreen("trackScreen");
-
-  });
-
-
-/* =========================================================
-   INFORMATION
-   ========================================================= */
-
-function showInfo(title,text){
-
-  document
-    .getElementById("infoTitle")
-    .textContent =
-    title;
-
-
-  document
-    .getElementById("infoText")
-    .textContent =
-    text;
-
-
-  showScreen("infoScreen");
-
-}
-
-
-document
-  .getElementById("helpButton")
-  .addEventListener("click",function(){
-
-    showInfo(
-      "Help",
-      "If you are in immediate danger, seek help from a trusted adult, teacher, school personnel, parent or guardian. Use this system to report safety concerns clearly and honestly."
-    );
-
-  });
-
-
-document
-  .getElementById("privacyButton")
-  .addEventListener("click",function(){
-
-    showInfo(
-      "Privacy",
-      "Your report should be handled confidentially. Avoid sharing unnecessary personal information in the description."
-    );
-
-  });
-
-
-document
-  .getElementById("rightsButton")
-  .addEventListener("click",function(){
-
-    showInfo(
-      "Your Rights",
-      "Every student deserves a safe, respectful and inclusive learning environment and should be able to raise safety concerns without intimidation."
-    );
-
-  });
-
-
-document
-  .getElementById("aboutButton")
-  .addEventListener("click",function(){
-
-    showInfo(
-      "About NIHS SCHOOLSAFE",
-      "NIHS SCHOOLSAFE is the New Israel High School Student Safety & Reporting System."
-    );
-
-  });
-
-
-/* =========================================================
+/* ================================
    REPORT CATEGORY
-   ========================================================= */
+================================ */
 
 document
   .querySelectorAll(".option[data-report-type]")
@@ -1149,15 +1064,12 @@ document
         .querySelectorAll(".option[data-report-type]")
         .forEach(function(item){
 
-          item.style.outline =
-            "none";
+          item.style.outline = "none";
 
         });
 
-
       this.style.outline =
         "3px solid #2d8fcb";
-
 
       state.reportType =
         this.dataset.reportType;
@@ -1167,10 +1079,162 @@ document
   });
 
 
-/* =========================================================
-   STEP 1
-   ========================================================= */
+/* ================================
+   STEP 1 NEXT
+================================ */
 
 document
   .getElementById("step1Next")
-  .addE
+  .addEventListener("click",function(){
+
+    if(!state.reportType){
+
+      alert("Please select what happened.");
+
+      return;
+
+    }
+
+    showStep("step2");
+
+  });
+
+
+/* ================================
+   STEP 2 BACK
+================================ */
+
+document
+  .getElementById("step2Back")
+  .addEventListener("click",function(){
+
+    showStep("step1");
+
+  });
+
+
+/* ================================
+   STEP 2 NEXT
+================================ */
+
+document
+  .getElementById("step2Next")
+  .addEventListener("click",function(){
+
+    const description =
+      document.getElementById("description").value.trim();
+
+    const location =
+      document.getElementById("location").value.trim();
+
+    const date =
+      document.getElementById("incidentDate").value;
+
+    if(description.length < 10){
+
+      alert("Please describe what happened using at least 10 characters.");
+
+      return;
+
+    }
+
+    if(!location){
+
+      alert("Please enter the location.");
+
+      return;
+
+    }
+
+    if(!date){
+
+      alert("Please select the date.");
+
+      return;
+
+    }
+
+    showStep("step3");
+
+  });
+
+
+/* ================================
+   URGENCY
+================================ */
+
+document
+  .querySelectorAll(".urgency")
+  .forEach(function(button){
+
+    button.addEventListener("click",function(){
+
+      document
+        .querySelectorAll(".urgency")
+        .forEach(function(item){
+
+          item.style.outline = "none";
+
+        });
+
+      this.style.outline =
+        "3px solid #2d8fcb";
+
+      state.urgency =
+        this.dataset.urgency;
+
+    });
+
+  });
+
+
+/* ================================
+   STEP 3 BACK
+================================ */
+
+document
+  .getElementById("step3Back")
+  .addEventListener("click",function(){
+
+    showStep("step2");
+
+  });
+
+
+/* ================================
+   ESCAPE HTML
+================================ */
+
+function escapeHtml(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ================================
+   REVIEW
+================================ */
+
+function buildReview(){
+
+  const description =
+    document.getElementById("description").value.trim();
+
+  const location =
+    document.getElementById("location").value.trim();
+
+  const date =
+    document.getElementById("incidentDate").value;
+
+  const time =
+    document.getElementById("incidentTime").value ||
+    "Not provided";
+
+  const repeated =
+    
